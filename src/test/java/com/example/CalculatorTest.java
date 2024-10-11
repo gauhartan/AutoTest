@@ -1,75 +1,88 @@
 package com.example;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculatorTest {
 
-    @org.junit.jupiter.api.Test
-    void canAdd() {
+    @ParameterizedTest
+
+    @CsvSource({
+            "3, 5, 8",
+            "0, 0, 0",
+            "2, -1, 1",
+            "-1, -1, -2"
+    }
+    )
+    void canAdd(int a, int b, int expected) {
         //given
         Calculator calc = new Calculator();
 
         //when
-        int result = calc.add(2, 5);
-        int result2 = calc.add(-3, 5);
-        int result3 = calc.add(4, -5);
+        int result = calc.add(a, b);
 
         //then
-        assertAll(() -> assertEquals(7, result),
-                () -> assertEquals(2, result2),
-                () -> assertEquals(-1, result3)
-        );
+        assertEquals(expected, result);
     }
 
-    @org.junit.jupiter.api.Test
-    void canSub() {
+    @ParameterizedTest
+
+    @CsvSource({
+            "5, 2, 3",
+            "4, 0, 4",
+            "10, -1, 11",
+            "-1, -1, 0"
+    }
+    )
+    void canSub(int a, int b, int expected) {
         //given
         Calculator calc = new Calculator();
 
         //when
-        int result = calc.subtract(2, 5);
-        int result2 = calc.subtract(-3, 5);
-        int result3 = calc.subtract(4, -5);
+        int result = calc.subtract(a, b);
 
         //then
-        assertAll(() -> assertEquals(-3, result),
-                () -> assertEquals(-8, result2),
-                () -> assertEquals(9, result3)
-        );
+        assertEquals(expected, result);
     }
 
-    @org.junit.jupiter.api.Test
-    void canMult() {
+    @ParameterizedTest
+
+    @CsvSource({
+            "5, 2, 10",
+            "4, 0, 0",
+            "10, -1, -10",
+            "-1, -1, 1"
+    }
+    )
+    void canMult(int a, int b, int expected) {
         //given
         Calculator calc = new Calculator();
 
         //when
-        int result = calc.multiply(2, 5);
-        int result2 = calc.multiply(-3, 5);
-        int result3 = calc.multiply(4, -5);
+        int result = calc.multiply(a, b);
 
         //then
-        assertAll(() -> assertEquals(10, result),
-                () -> assertEquals(-15, result2),
-                () -> assertEquals(-20, result3)
-        );
+        assertEquals(expected, result);
     }
 
-    @org.junit.jupiter.api.Test
-    void canDiv() {
+    @ParameterizedTest
+    @CsvSource({
+            "4, 2, 2",
+            "4, 1, 4",
+            "10, -1, -10",
+            "-1, -1, 1"
+    }
+    )
+    void canDiv(int a, int b, int expected) {
         //given
         Calculator calc = new Calculator();
 
         //when
-        int result = calc.divide(10, 5);
-        int result2 = calc.divide(-5, 5);
-        int result3 = calc.divide(-20, -5);
+        int result = calc.divide(a, b);
 
         //then
-        assertAll(() -> assertEquals(2, result),
-                () -> assertEquals(-1, result2),
-                () -> assertEquals(4, result3)
-        );
+        assertEquals(expected, result);
     }
 }
